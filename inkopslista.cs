@@ -19,6 +19,7 @@ while (true)
         {
             Console.WriteLine($"{i+1}. {varor[i]} - {priser[i]} kr");
         }
+        Console.WriteLine($"Totalt: {priser.Sum()} kr");
     }
     Console.ReadLine();
 }

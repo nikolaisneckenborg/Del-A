@@ -18,22 +18,38 @@ while (true)
     }
     if (felinput)
     {
-        Console.Write("Ogiltigt pris, försök igen: ");
+        Console.Write("Ogiltigt input, försök igen: ");
     }
     else
     {
         Console.Write("Input från användaren: ");
     }
-    string? vara = Console.ReadLine()!.Trim();
-    Console.Write("Ange ett pris för varan: ");
-    if(int.TryParse(Console.ReadLine(), out int pris)){
-        varor.Add(vara);
-        priser.Add(pris);
-        felinput = false;
+    string? input = Console.ReadLine()!.Trim();
+    if(int.TryParse(input, out int nummer))
+    {
+        if(nummer<1 || nummer > varor.Count)
+        {
+            felinput = true;
+        }
+        else
+        {
+            varor.RemoveAt(nummer-1);
+            priser.RemoveAt(nummer-1);
+            felinput = false;
+        }
     }
     else
     {
-        felinput = true;
+        Console.Write("Ange ett pris för varan: ");
+        if(int.TryParse(Console.ReadLine(), out int pris)){
+            varor.Add(input);
+            priser.Add(pris);
+            felinput = false;
+        }
+        else
+        {
+            felinput = true;
+        }
     }
     Console.Clear();
 }

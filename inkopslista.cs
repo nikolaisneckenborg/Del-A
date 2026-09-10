@@ -1,12 +1,32 @@
 List<string> varor = [];
 List<int> priser = [];
 bool felinput = false;
+bool dyrast = false;
+
+static void dyrastevaror(List<string> varor, List<int> priser)
+{
+    int index = 1;
+    int max = priser.Max();
+    for(int i = 0; i < varor.Count; i++)
+    {
+        if(priser[i] == max)
+        {
+            Console.WriteLine($"{index}. {varor[i]} - {priser[i]} kr");
+            index++;
+        }
+    }
+}
 
 while (true)
 {
     if (varor.Count < 1)
     {
         Console.WriteLine("Det finns inga varor i inköpslistan.");
+    }
+    else if (dyrast)
+    {
+        dyrastevaror(varor, priser);
+        dyrast = false;
     }
     else
     {
@@ -36,6 +56,17 @@ while (true)
             varor.RemoveAt(nummer-1);
             priser.RemoveAt(nummer-1);
             felinput = false;
+        }
+    }
+    else if(input == "dyrast")
+    {
+        if (varor.Count > 0)
+        {
+            dyrast = true;
+        }
+        else
+        {
+            felinput = true;
         }
     }
     else

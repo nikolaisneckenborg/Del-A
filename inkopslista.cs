@@ -1,6 +1,7 @@
 List<string> varor = [];
 List<int> priser = [];
-bool felinput = false;
+bool validprice = false;
+bool validchoice = false;
 bool dyrast = false;
 
 static void dyrastevaror(List<string> varor, List<int> priser)
@@ -36,7 +37,12 @@ while (true)
         }
         Console.WriteLine($"Totalt: {priser.Sum()} kr");
     }
-    if (felinput)
+    if (validprice)
+    {
+        
+        Console.Write("Ogiltigt pris, försök igen: ");
+    }
+    else if (validchoice)
     {
         Console.Write("Ogiltigt input, försök igen: ");
     }
@@ -49,13 +55,13 @@ while (true)
     {
         if(nummer<1 || nummer > varor.Count)
         {
-            felinput = true;
+            validchoice = true;
         }
         else
         {
             varor.RemoveAt(nummer-1);
             priser.RemoveAt(nummer-1);
-            felinput = false;
+            validchoice = false;
         }
     }
     else if(input == "dyrast")
@@ -63,10 +69,11 @@ while (true)
         if (varor.Count > 0)
         {
             dyrast = true;
+            validchoice = false;
         }
         else
         {
-            felinput = true;
+            validchoice = true;
         }
     }
     else
@@ -75,11 +82,12 @@ while (true)
         if(int.TryParse(Console.ReadLine(), out int pris)){
             varor.Add(input);
             priser.Add(pris);
-            felinput = false;
+            validprice = false;
+            validchoice = false;
         }
         else
         {
-            felinput = true;
+            validprice = true;
         }
     }
     Console.Clear();
